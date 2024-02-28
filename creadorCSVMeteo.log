@@ -1,0 +1,91 @@
+Error in file(file, ifelse(append, "a", "w")) : 
+  no se puede abrir la conexi'on
+Calls: write.csv -> eval.parent -> eval -> eval -> <Anonymous> -> file
+Adem'as: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/Meteo/datos_meteorologicos_madrid_2024-02-21.csv': No such file or directory
+Ejecuci'on interrumpida
+Error in file(file, ifelse(append, "a", "w")) : 
+  no se puede abrir la conexi'on
+Calls: write.csv -> eval.parent -> eval -> eval -> <Anonymous> -> file
+Adem'as: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/Meteo/datos_meteorologicos_madrid_2024-02-21.csv': No such file or directory
+Ejecuci'on interrumpida
+Error in file(file, ifelse(append, "a", "w")) : 
+  no se puede abrir la conexi'on
+Calls: write.csv -> eval.parent -> eval -> eval -> <Anonymous> -> file
+Adem'as: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/Meteo/datos_meteorologicos_madrid_2024-02-21.csv': No such file or directory
+Ejecuci'on interrumpida
+Error in file(file, ifelse(append, "a", "w")) : 
+  no se puede abrir la conexi'on
+Calls: write.csv -> eval.parent -> eval -> eval -> <Anonymous> -> file
+Adem'as: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/Meteo/datos_meteorologicos_madrid_2024-02-21.csv': No such file or directory
+Ejecuci'on interrumpida
+Error in file(file, ifelse(append, "a", "w")) : 
+  no se puede abrir la conexi'on
+Calls: write.csv -> eval.parent -> eval -> eval -> <Anonymous> -> file
+Adem'as: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/Meteo/datos_meteorologicos_madrid_2024-02-21.csv': No such file or directory
+Ejecuci'on interrumpida
+Error in file(file, ifelse(append, "a", "w")) : 
+  no se puede abrir la conexi'on
+Calls: write.csv -> eval.parent -> eval -> eval -> <Anonymous> -> file
+Adem'as: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/Meteo/datos_meteorologicos_madrid_2024-02-21.csv': No such file or directory
+Ejecuci'on interrumpida
+Error in file(file, ifelse(append, "a", "w")) : 
+  no se puede abrir la conexi'on
+Calls: write.csv -> eval.parent -> eval -> eval -> <Anonymous> -> file
+Adem'as: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/Meteo/datos_meteorologicos_madrid_2024-02-21.csv': No such file or directory
+Ejecuci'on interrumpida
+Error in file(file, ifelse(append, "a", "w")) : 
+  no se puede abrir la conexi'on
+Calls: write.csv -> eval.parent -> eval -> eval -> <Anonymous> -> file
+Adem'as: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/datos_meteorologicos_madrid_2024-02-21.csv': No such file or directory
+Ejecuci'on interrumpida
+Error in file(file, ifelse(append, "a", "w")) : 
+  no se puede abrir la conexi'on
+Calls: write.csv -> eval.parent -> eval -> eval -> <Anonymous> -> file
+Adem'as: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/datos_meteorologicos_madrid_2024-02-21.csv': No such file or directory
+Ejecuci'on interrumpida
+[1] FALSE
+Warning message:
+In file.remove(paste0("datos_meteorologicos_madrid_", fechaAnterior,  :
+  no fue posible abrir el archivo 'datos_meteorologicos_madrid_2024-02-20.csv', motivo 'No such file or directory'
+[1] FALSE
+Warning message:
+In file.remove(paste0("datos_meteorologicos_madrid_", fechaAnterior,  :
+  no fue posible abrir el archivo 'datos_meteorologicos_madrid_2024-02-20.csv', motivo 'No such file or directory'
+[1] FALSE
+Warning message:
+In file.remove(paste0("datos_meteorologicos_madrid_", fechaAnterior,  :
+  no fue posible abrir el archivo 'datos_meteorologicos_madrid_2024-02-20.csv', motivo 'No such file or directory'
+[1] FALSE
+Warning message:
+In file.remove(paste0("datos_meteorologicos_madrid_", fechaAnterior,  :
+  no fue posible abrir el archivo 'datos_meteorologicos_madrid_2024-02-20.csv', motivo 'No such file or directory'
+[1] FALSE
+Warning message:
+In file.remove(paste0("datos_meteorologicos_madrid_", fechaAnterior,  :
+  no fue posible abrir el archivo 'datos_meteorologicos_madrid_2024-02-21.csv', motivo 'No such file or directory'
+[1] FALSE
+Warning message:
+In file.remove(paste0("datos_meteorologicos_madrid_", fechaAnterior,  :
+  no fue posible abrir el archivo 'datos_meteorologicos_madrid_2024-02-21.csv', motivo 'No such file or directory'
+[1] FALSE
+Warning message:
+In file.remove(paste0("datos_meteorologicos_madrid_", fechaAnterior,  :
+  no fue posible abrir el archivo 'datos_meteorologicos_madrid_2024-02-25.csv', motivo 'No such file or directory'

@@ -1,0 +1,4 @@
+[1] FALSE
+Warning message:
+In file.remove(paste0("datos_meteorologicos_madrid_", fechaAnterior,  :
+  no fue posible abrir el archivo 'datos_meteorologicos_madrid_2024-02-20.csv', motivo 'No such file or directory'
