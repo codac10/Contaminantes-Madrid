@@ -2,7 +2,6 @@
 ## y guardarlos en un archivo csv
 require("cronR")
 
-library(cronR)
 
 # Direccion del script a ejecutar~/Library/Mobile Documents/com~apple~CloudDocs/UPM/TFG/DatosTiempoReal/creadorCSVMeteo.R
 path <- "/Users/pablocodina/Library/Mobile Documents/com~apple~CloudDocs/UPM/TFG/DatosTiempoReal/creadorCSVMeteo.R"
@@ -10,9 +9,8 @@ path <- "/Users/pablocodina/Library/Mobile Documents/com~apple~CloudDocs/UPM/TFG
 # Crear comando para ejecutar el script
 cmd <- cron_rscript(path)
 
-cron_add(command = cmd, frequency = "daily", at = "23:30", id = "meteorologicos",
+cron_add(command = cmd, frequency = "daily", at = "00:30", id = "meteorologicos",
          description = "Datos meteorologicos")
-
 
 ### Eliminar automatizacion ###
 #cron_rm(id="meteorologicos")
@@ -23,9 +21,8 @@ path2 <- "/Users/pablocodina/Library/Mobile Documents/com~apple~CloudDocs/UPM/TF
 # Crear comando para ejecutar el script
 cmd2 <- cron_rscript(path2)
 
-cron_add(command = cmd2, frequency = "daily", at = "23:31", id = "contaminantes",
+cron_add(command = cmd2, frequency = "daily", at = "00:31", id = "contaminantes",
          description = "Datos contaminantes")
-
 
 ### Eliminar automatizacion ###
 #cron_rm(id="contaminantes")

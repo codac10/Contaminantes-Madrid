@@ -16,6 +16,6 @@ fecha <- Sys.Date()
 write.csv(df, paste0("datos_contaminantes_madrid_",fecha,".csv"), row.names = FALSE)
 
 # Eliminar los datos antiguos
-fechaAnterior <- Sys.Date() - 1
-file.remove(paste0("./DatosTiempoReal/Data/datos_contaminantes_madrid_",fechaAnterior,".csv"))
+#fechaAnterior <- Sys.Date() - 1
+#file.remove(paste0("./DatosTiempoReal/Data/datos_contaminantes_madrid_",fechaAnterior,".csv"))
 setwd("/Users/pablocodina/Library/Mobile Documents/com~apple~CloudDocs/UPM/TFG/DatosTiempoReal")

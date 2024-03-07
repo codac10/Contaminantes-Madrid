@@ -1,15 +1,17 @@
-require("lubridate");require("stringr");require("rlist");require("dplyr");require("zoo")
-require("ggplot2")
 
-setwd("/Users/pablocodina/Library/Mobile Documents/com~apple~CloudDocs/UPM/TFG/DatosTiempoReal")
-
-source("./getDailyData.R")#Usada
-#source("./DatosTiempoReal/groupByEstacionDaily.R")
-#source("./datosMeteo.R")
-source("./getGroupedLiveData.R")#Usada
-source("./getDataFrameMeteo.R")#Usada
 
 getInstantDataMeteo <- function(){
+  
+  require("lubridate");require("stringr");require("rlist");require("dplyr");require("zoo")
+  require("ggplot2")
+  
+  setwd("/Users/pablocodina/Library/Mobile Documents/com~apple~CloudDocs/UPM/TFG/DatosTiempoReal")
+  
+  source("./getDailyData.R")#Usada
+  #source("./DatosTiempoReal/groupByEstacionDaily.R")
+  #source("./datosMeteo.R")
+  source("./getGroupedLiveData.R")#Usada
+  source("./getDataFrameMeteo.R")#Usada
   
   date <- Sys.Date()
   dia <- day(date)

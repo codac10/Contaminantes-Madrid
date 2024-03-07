@@ -63,3 +63,7 @@ In file.remove(paste0("./DatosTiempoReal/Data/datos_contaminantes_madrid_",  :
 Warning message:
 In file.remove(paste0("./DatosTiempoReal/Data/datos_contaminantes_madrid_",  :
   no fue posible abrir el archivo './DatosTiempoReal/Data/datos_contaminantes_madrid_2024-02-25.csv', motivo 'No such file or directory'
+[1] FALSE
+Warning message:
+In file.remove(paste0("./DatosTiempoReal/Data/datos_contaminantes_madrid_",  :
+  no fue posible abrir el archivo './DatosTiempoReal/Data/datos_contaminantes_madrid_2024-02-28.csv', motivo 'No such file or directory'

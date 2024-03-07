@@ -7,7 +7,7 @@ source("./getDailyData.R")#Usada
 #source("./DatosTiempoReal/groupByEstacionDaily.R")
 #source("./datosMeteo.R")
 source("./getGroupedLiveData.R")#Usada
-source("./getDataFrameMeteo.R")#Usada
+source("./getDataFrameCont.R")#Usada
 
 ##### FALTA POR ACTUALIZAR PARA QUE ESTEN LOS DATOS DE LOS CONTAMINANTES
 
@@ -25,10 +25,10 @@ getInstantDataCont <- function(){
   #dfContaminantes <- datosMeteo(d)
   
   # Obtiene los datos meteorologicos del dia anterior y del dia actual
-  d <- getDataFrameMeteo()
+  d <- getDataFrameCont()
   
   # Agrupar los datos en directo por estacion y contaminante
-  dfMeteoDirecto <- getGroupedLiveData(d)
+  dfContDirecto <- getGroupedLiveData(d)
   
-  return(dfMeteoDirecto)
+  return(dfContDirecto)
 }

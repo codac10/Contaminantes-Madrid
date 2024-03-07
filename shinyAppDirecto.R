@@ -3,11 +3,28 @@ require("rlist");require("forecast");require("leaflet");require("bslib")
 
 setwd("/Users/pablocodina/Library/Mobile Documents/com~apple~CloudDocs/UPM/TFG/DatosTiempoReal")
 
+# Funciones Meteo
 source("./getInstantDataMeteo.R");source("./getStationMeteoData.R")
+source("./llamadaAPIMeteo.R")
+
+# Funciones Contaminantes
+source("./getInstantDataCont.R");source("./getStationContData.R")
+
+# Funciones Predicción
+source("./getPrediction.R")
 
 # Obtener todos los datos de las estaciones metereologicas con sus contaminantes
-dfMeteo <- getInstantDataMeteo()
-dfMeteoEstaciones <- getStationMeteoData(dfMeteo)
+#dfMeteo <- getInstantDataMeteo()
+#dfContEstaciones <- getStationContData(dfMeteo)
+
+# Hacer lamada a la API para sacar los datos meteo
+#meteo <- llamadaAPIMeteo()
+
+# Obtener los datos de los contaminantes
+dfCont <- getInstantDataCont()
+dfContEstaciones <- getStationContData(dfCont)
+
+# Hacer predicción de los contaminantes
 
 
 ui <- dashboardPage(
@@ -41,7 +58,7 @@ ui <- dashboardPage(
                     solidHeader = TRUE,
                     width = 12,
                     fluidRow(
-                      column(6,selectInput("estacion.estacion", "Estación:", choices = c(unique(names(dfMeteoEstaciones$dfMeteo))))),
+                      column(6,selectInput("estacion.estacion", "Estación:", choices = c(unique(names(dfContEstaciones$dfCont))))),
                       column(6,selectInput("estacion.contaminante", "Contaminante:", choices = c()))
                     ),
                     plotOutput("estacion.grafico", height = 250),
@@ -63,13 +80,15 @@ ui <- dashboardPage(
                              status = "primary",
                              solidHeader = TRUE,
                              width = 12,
-                             selectInput("prediccion.estacion", "Estación:", choices = c()),
+                             selectInput("prediccion.estacion", "Estación:", choices =c(unique(names(dfContEstaciones$dfCont)))),
                              selectInput("prediccion.contaminante", "Contaminante:", choices = c()),
                          ),
                        ),
                        fluidRow(
-                         valueBox(0, h4("Nivel actual"), icon = icon("clock"), color = "blue", width = 6),
-                         valueBox(0, h4("Error del modelo (MAPE)"), icon = icon("xmark"), color = "red", width = 6),
+                         #valueBox(0, h4("Nivel actual"), icon = icon("clock"), color = "blue", width = 6),
+                         #valueBox(0, h4("Error del modelo (MAPE)"), icon = icon("xmark"), color = "red", width = 6),
+                         valueBoxOutput("prediccion.actual", width = 6),
+                         valueBoxOutput("prediccion.mape", width = 6)
                        ),
                        fluidRow(
                          box(title = "Próximos niveles de contaminación",
@@ -93,7 +112,7 @@ ui <- dashboardPage(
                   solidHeader = TRUE,
                   width = 12,
                   plotOutput("prediccion.grafico"),
-                  height = 400
+                  height = 500
                   )
               )
       )
@@ -117,43 +136,75 @@ server<- function(input, output, session) {
   
   # Contaminantes de la estacion seleccionada
   observeEvent(input$estacion.estacion, {
-    updateSelectInput(session, "estacion.contaminante", choices = names(dfMeteoEstaciones$dfMeteo[[paste0("",input$estacion.estacion,"")]]))
+    updateSelectInput(session, "estacion.contaminante", choices = names(dfContEstaciones$dfCont[[paste0("",input$estacion.estacion,"")]]))
   })
   
   # Grafico de la estacion y contaminante seleccionados
   output$estacion.grafico <- renderPlot({
     ggplot() +
-      geom_line(data = dfMeteoEstaciones$dfMeteo[[paste0("",input$estacion.estacion,"")]][[paste0("",input$estacion.contaminante,"")]],
+      geom_line(data = dfContEstaciones$dfCont[[paste0("",input$estacion.estacion,"")]][[paste0("",input$estacion.contaminante,"")]],
                 aes(x = FECHA, y = VALOR)) +
       theme_minimal()
     
   })
   
   output$estacion.contaminantes.directo <- renderPlot({
-    plot(dfMeteoEstaciones$dfMeteo, type = "l", col = 1, lwd = 2, main = "Contaminantes en directo", xlab = "Hora", ylab = "Nivel")
+    plot(dfContEstaciones$dfCont, type = "l", col = 1, lwd = 2, main = "Contaminantes en directo", xlab = "Hora", ylab = "Nivel")
   })
   
   output$estacion.meteo.directo <- renderPlot({
-    plot(dfMeteoEstaciones$dfMeteo$`28079004`, type = "l", col = 1, lwd = 2, main = "Meteorología en directo", xlab = "Hora", ylab = "Nivel")
+    plot(dfContEstaciones$dfCont$`28079004`, type = "l", col = 1, lwd = 2, main = "Meteorología en directo", xlab = "Hora", ylab = "Nivel")
   })
   
   output$estacion.info.contaminante <- renderText({
     paste("Contaminante: ", "28079004", "\n",
-          "Estación: ", "28079004", "\n",
+          "Estación: ", paste0("",input$estacion.estacion,""), "\n",
           "Fecha: ", Sys.Date(), "\n",
           "Hora: ", Sys.time())
   })
   
-  output$prediccion.estacion <- renderUI({
-    selectInput("prediccion.estacion", "Estación", choices = dfMeteoEstaciones$dfEstaciones$ESTACION)
+  # Contaminantes de la estacion seleccionada para prediccion
+  observeEvent(input$prediccion.estacion, {
+    updateSelectInput(session, "prediccion.contaminante", choices = names(dfContEstaciones$dfCont[[paste0("",input$prediccion.estacion,"")]]))
   })
   
-  output$prediccion.contaminante <- renderUI({
-    selectInput("prediccion.contaminante", "Contaminante", choices = names(dfMeteoEstaciones$dfMeteo))
+  # Modelo de prediccion
+  output$prediccion.grafico <- renderPlot({
+    getPrediction(meteo,dfContEstaciones[[1]],paste0("",input$prediccion.estacion,""),paste0("",input$prediccion.contaminante,""))$plot
+    
   })
   
-  output$prediccion.datos <- renderText({
-    paste("Contaminante: ", "28079004", "\n",)
+  # Parámetros de la prediccion
+  output$prediccion.modelo <- renderPrint({
+    getPrediction(meteo,dfContEstaciones[[1]],paste0("",input$prediccion.estacion,""),paste0("",input$prediccion.contaminante,""))$modeloFuturo
+  })
+  
+  # Error de la prediccion
+  output$prediccion.mape <- renderValueBox({
+    mapeValor <- getPrediction(meteo,dfContEstaciones[[1]],paste0("",input$prediccion.estacion,""),paste0("",input$prediccion.contaminante,""))$mape %>% 
+          round(4)
+    mapeValor <- paste0("",mapeValor*100," %")
+    valueBox(
+      mapeValor,
+      h4("Error del modelo (MAPE)"),
+      icon = icon("xmark"),
+      color = "red"
+      )
+    
+  })
+  
+  # Ultimo valor de contaminante
+  output$prediccion.actual <- renderValueBox({
+    actualValor <- dfContEstaciones$dfCont[[paste0("",input$prediccion.estacion,"")]][[paste0("",input$prediccion.contaminante,"")]]$VALOR %>%
+      last() %>% 
+      round(4)
+    valueBox(
+      actualValor,
+      h4("Nivel actual"),
+      icon = icon("clock"),
+      color = "blue"
+    )
+    
   })
   
 }
