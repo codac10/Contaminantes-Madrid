@@ -127,9 +127,9 @@ server<- function(input, output, session) {
     leaflet() %>%
       addTiles() %>%
       addMarkers(
-        lng = dfMeteoEstaciones$dfEstaciones$LONGITUD,
-        lat = dfMeteoEstaciones$dfEstaciones$LATITUD,
-        popup = paste("<h4>", dfMeteoEstaciones$dfEstaciones$ESTACION,"</h4>")
+        lng = dfContEstaciones$dfEstaciones$LONGITUD,
+        lat = dfContEstaciones$dfEstaciones$LATITUD,
+        popup = paste("<h4>", dfContEstaciones$dfEstaciones$ESTACION,"</h4>")
         )
     
   })
@@ -170,22 +170,37 @@ server<- function(input, output, session) {
   
   # Modelo de prediccion
   output$prediccion.grafico <- renderPlot({
-    getPrediction(meteo,dfContEstaciones[[1]],paste0("",input$prediccion.estacion,""),paste0("",input$prediccion.contaminante,""))$plot
+    tryCatch({
+      getPrediction(meteo,dfContEstaciones[[1]],paste0("",input$prediccion.estacion,""),paste0("",input$prediccion.contaminante,""))$plot  
+    },
+    error = function(e){
+      plot(0,0, type = "n", main = "Error en el modelo a la hora de hacer una predicción", xlab = "Hora", ylab = "Nivel")
+    }
+    )
+    
     
   })
   
   # Parámetros de la prediccion
   output$prediccion.modelo <- renderPrint({
-    getPrediction(meteo,dfContEstaciones[[1]],paste0("",input$prediccion.estacion,""),paste0("",input$prediccion.contaminante,""))$modeloFuturo
+    tryCatch({
+      getPrediction(meteo,dfContEstaciones[[1]],paste0("",input$prediccion.estacion,""),paste0("",input$prediccion.contaminante,""))$modeloFuturo
+    },
+      error = function(e){
+        paste0("Error en el modelo a la hora de hacer una predicción, seleccione otra estación o contaminante.")
+    }
+    )
   })
   
   # Error de la prediccion
   output$prediccion.mape <- renderValueBox({
+    try({
     mapeValor <- getPrediction(meteo,dfContEstaciones[[1]],paste0("",input$prediccion.estacion,""),paste0("",input$prediccion.contaminante,""))$mape %>% 
           round(4)
     mapeValor <- paste0("",mapeValor*100," %")
+    }, silent = TRUE)
     valueBox(
-      mapeValor,
+      ifelse(mapeValor != "0 %",mapeValor,paste0("ERROR")), # Si el valor es 0, es que  hay error
       h4("Error del modelo (MAPE)"),
       icon = icon("xmark"),
       color = "red"

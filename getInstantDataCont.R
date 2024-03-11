@@ -1,18 +1,18 @@
-require("lubridate");require("stringr");require("rlist");require("dplyr");require("zoo")
-require("ggplot2")
 
-setwd("/Users/pablocodina/Library/Mobile Documents/com~apple~CloudDocs/UPM/TFG/DatosTiempoReal")
-
-source("./getDailyData.R")#Usada
-#source("./DatosTiempoReal/groupByEstacionDaily.R")
-#source("./datosMeteo.R")
-source("./getGroupedLiveData.R")#Usada
-source("./getDataFrameCont.R")#Usada
 
 ##### FALTA POR ACTUALIZAR PARA QUE ESTEN LOS DATOS DE LOS CONTAMINANTES
 
 getInstantDataCont <- function(){
+  require("lubridate");require("stringr");require("rlist");require("dplyr");require("zoo")
+  require("ggplot2")
   
+  setwd("/Users/pablocodina/Library/Mobile Documents/com~apple~CloudDocs/UPM/TFG/DatosTiempoReal")
+  
+  source("./getDailyData.R")#Usada
+  #source("./DatosTiempoReal/groupByEstacionDaily.R")
+  #source("./datosMeteo.R")
+  source("./getGroupedLiveData.R")#Usada
+  source("./getDataFrameCont.R")#Usada
   
   date <- Sys.Date()
   dia <- day(date)

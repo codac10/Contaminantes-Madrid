@@ -1,11 +1,9 @@
-
-
 getDataFrameCont <- function(){
   source("./getDailyDataCont.R")
   
   # Descargar los datos de ayer
   ayer = list.files(path = "./Data/Contaminantes/",pattern="\\.csv$")
-  dfAyer <- read.csv(paste0("./Data/Contaminantes/",ayer))
+  dfAyer <- read.csv(paste0("./Data/Contaminantes/",last(ayer)))
   
   # Descargar los datos de hoy
   nombreColumnnas <- c("PROVINCIA", "MUNICIPIO", "ESTACION", "MAGNITUD", "TECNICA", "PERIODO_DE_ANALISIS",

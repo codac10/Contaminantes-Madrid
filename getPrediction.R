@@ -2,7 +2,7 @@ getPrediction <- function(meteo,dfCont,estacion,contaminante){
   
   # Seleccionar la estacion y contaminante
   df <- dfCont[[paste0("",estacion,"")]][[paste0("",contaminante,"")]]
-  #df <- dfCont[["04"]][["12"]]
+  #df <- dfCont[["Plaza de España"]][["06"]]
   
   # Separar regresores entre pasado y futuro
   meteoPasado <- meteo[meteo$FECHA < Sys.time(),]
